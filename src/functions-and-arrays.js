@@ -17,25 +17,18 @@ const words = [
 ];
 
 function findLongestWord(arr) {
-  let longestLength = null;
-  let refArr = [];
+  let longestWord = arr[0];
+
   if (arr.length === 0) {
     return null;
-  } else if (arr.length === 1) {
-    return arr[0];
-  } else {
-    for (let i = 0; i < arr.length; i++) {
-      if (longestLength === null || longestLength < arr[i].length) {
-        longestLength = arr[i].length;
-      }
+  }
+
+  for (let i = 0; i < arr.length; i++) {
+    if (longestWord.length < arr[i].length) {
+      longestWord = arr[i];
     }
   }
-  arr.forEach((el) => {
-    el.length === longestLength && refArr.push(el);
-    return refArr;
-  });
-
-  return refArr[0];
+  return longestWord;
 }
 
 // Iteration #3: Calculate the sum
@@ -82,6 +75,9 @@ function sum(arr) {
 const reduceUnsortedArray = (arrayToSort) => {
   let total = 0;
   arrayToSort.forEach((element) => {
+    if (typeof element === 'array' || typeof element === 'object') {
+      throw new Error("Unsupported data type sir or ma'am");
+    }
     if (typeof element === 'number') {
       total = total + element;
     } else if (typeof element === 'string') {
